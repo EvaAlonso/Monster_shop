@@ -32,6 +32,7 @@ public class ProductService {
             Product existingProduct = foundProduct.get();
              existingProduct.setName(updateProduct.getName());
              existingProduct.setPrice(updateProduct.getPrice());
+             existingProduct.setImageUrl(updateProduct.getImageUrl());
              existingProduct.setRating(updateProduct.getRating());
              existingProduct.setReviewCount(updateProduct.getReviewCount());
 

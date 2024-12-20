@@ -20,7 +20,7 @@ public class ProductController {
     public List<Product> getAllProducts(){
         return productService.getAll();
     }
-    @GetMapping("/products/{productId}")
+    @GetMapping("/products/{id}")
     public ResponseEntity<Product> findProductById(@PathVariable long id){
         Optional<Product> foundProduct = productService.findProduct(id);
 
@@ -33,11 +33,11 @@ public class ProductController {
     public void  createProduct(@RequestBody Product newProduct){
         productService.addProduct(newProduct);
     }
-    @DeleteMapping("/products/{productId}")
+    @DeleteMapping("/products/{id}")
     public void deleteProductById(@PathVariable long id){
         productService.deleteProduct(id);
     }
-    @PutMapping("/products/{productId}")
+    @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable long id, @RequestBody Product updateProduct){
         try {
             Product product = productService.updatedProduct(id, updateProduct);

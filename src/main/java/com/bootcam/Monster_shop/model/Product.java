@@ -17,6 +17,7 @@ public class Product {
     private Long id;
     private String name;
     private double price;
+    private String imageUrl;
     private double rating;
     private int reviewCount;
     private boolean featured;
