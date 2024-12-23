@@ -1,7 +1,7 @@
 package com.bootcam.Monster_shop.service;
 
 import com.bootcam.Monster_shop.model.Product;
-import com.bootcam.Monster_shop.repository.IProductRepository;
+import com.bootcam.Monster_shop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,25 +9,25 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
-    private final IProductRepository IProductRepository;
+    private final ProductRepository ProductRepository;
 
-    public ProductService(IProductRepository IProductRepository ){
-        this.IProductRepository = IProductRepository;
+    public ProductService(ProductRepository IProductRepository ){
+        this.ProductRepository = IProductRepository;
     }
     public List<Product> getAll(){
-        return IProductRepository.findAll();
+        return ProductRepository.findAll();
     }
     public Product addProduct(Product newProduct){
-        return IProductRepository.save(newProduct);
+        return ProductRepository.save(newProduct);
     }
     public void deleteProduct(long id){
-        IProductRepository.deleteById(id);
+        ProductRepository.deleteById(id);
     }
     public Optional<Product> findProduct(long id){
-        return IProductRepository.findById(id);
+        return ProductRepository.findById(id);
     }
     public Product updatedProduct(long id, Product updateProduct){
-        Optional<Product> foundProduct = IProductRepository.findById(id);
+        Optional<Product> foundProduct = ProductRepository.findById(id);
         if(foundProduct.isPresent()){
             Product existingProduct = foundProduct.get();
              existingProduct.setName(updateProduct.getName());
@@ -37,7 +37,7 @@ public class ProductService {
              existingProduct.setReviewCount(updateProduct.getReviewCount());
 
 
-             return IProductRepository.save(existingProduct);
+             return ProductRepository.save(existingProduct);
         }
         throw new RuntimeException("Product not found with id: " + id);
     }

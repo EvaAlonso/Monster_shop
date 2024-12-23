@@ -16,11 +16,11 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    @GetMapping("/products")
+    @GetMapping("/api/products")
     public List<Product> getAllProducts(){
         return productService.getAll();
     }
-    @GetMapping("/products/{id}")
+    @GetMapping("/api/products/{id}")
     public ResponseEntity<Product> findProductById(@PathVariable long id){
         Optional<Product> foundProduct = productService.findProduct(id);
 
@@ -29,15 +29,15 @@ public class ProductController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @PostMapping("/products")
+    @PostMapping("/api/products")
     public void  createProduct(@RequestBody Product newProduct){
         productService.addProduct(newProduct);
     }
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/api/products/{id}")
     public void deleteProductById(@PathVariable long id){
         productService.deleteProduct(id);
     }
-    @PutMapping("/products/{id}")
+    @PutMapping("/api/products/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable long id, @RequestBody Product updateProduct){
         try {
             Product product = productService.updatedProduct(id, updateProduct);
