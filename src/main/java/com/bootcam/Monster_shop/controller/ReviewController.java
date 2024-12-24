@@ -11,17 +11,18 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/reviews")
 public class ReviewController {
     private final ReviewService reviewService;
 
     public ReviewController(ReviewService reviewService){
         this.reviewService = reviewService;
     }
-    @GetMapping("api/reviews")
+    @GetMapping
     public List<Review> getAllreviews(){
         return reviewService.getAll();
     }
-    @GetMapping("api/reviews/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Review> findReviewById(@PathVariable long id){
         Optional<Review> foundReview = reviewService.findReview(id);
 
@@ -30,15 +31,15 @@ public class ReviewController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @PostMapping("api/reviews")
-    public void createReview(@RequestBody Review newReview){
-        reviewService.addReview(newReview);
+    @PostMapping("/product/{productId}")
+    public void createReview(@PathVariable Long productId ,@RequestBody Review newReview){
+        reviewService.addReview(productId,newReview);
     }
-    @DeleteMapping("/api/reviews/{id}")
+    @DeleteMapping("/{id}")
     public void deleteReviewById(@PathVariable long id){
         reviewService.deleteReview(id);
     }
-    @PutMapping("/api/reviews/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Review> updateReview(@PathVariable long id, @RequestBody Review updateReview){
         try {
             Review review = reviewService.updatedReview(id, updateReview);

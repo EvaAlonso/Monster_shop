@@ -12,15 +12,20 @@ import java.util.Optional;
 @Service
 public class ReviewService {
     private final ReviewRepository ReviewRepository;
+    private final ProductRepository ProductRepository;
 
-    public ReviewService(ReviewRepository reviewRepository) {
+    public ReviewService(ReviewRepository reviewRepository, ProductRepository productRepository, com.bootcam.Monster_shop.repository.ProductRepository productRepository1) {
         ReviewRepository = reviewRepository;
+        ProductRepository = productRepository;
     }
 
     public List<Review> getAll(){
         return ReviewRepository.findAll();
     }
-    public Review addReview(Review newReview){
+    //Tengo que buscar el producto por su id, asignar el producto a la reseña y guardar la reseña
+    public Review addReview(Long productId,Review newReview){
+        Product product = ProductRepository.findById(productId).orElseThrow(()->new RuntimeException("Product not found with id :" + productId));
+        newReview.setProduct(product);
         return ReviewRepository.save(newReview);
     }
     public void deleteReview(long id){
