@@ -18,9 +18,17 @@ public class ReviewController {
     public ReviewController(ReviewService reviewService){
         this.reviewService = reviewService;
     }
+   // @GetMapping
+   // public List<Review> getAllreviews(){
+    //    return reviewService.getAll();
+   // }
     @GetMapping
-    public List<Review> getAllreviews(){
-        return reviewService.getAll();
+    public ResponseEntity<List<Review>> getReviews(@RequestParam Long productId){
+        List<Review> reviews = reviewService.getReviewsByProductId(productId);
+        if(reviews.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Review> findReviewById(@PathVariable long id){

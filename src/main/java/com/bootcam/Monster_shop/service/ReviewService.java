@@ -22,6 +22,9 @@ public class ReviewService {
     public List<Review> getAll(){
         return ReviewRepository.findAll();
     }
+    public List<Review> getReviewsByProductId(Long productId){
+        return ReviewRepository.findByProductId(productId);
+    }
     //Tengo que buscar el producto por su id, asignar el producto a la reseña y guardar la reseña
     public Review addReview(Long productId,Review newReview){
         Product product = ProductRepository.findById(productId).orElseThrow(()->new RuntimeException("Product not found with id :" + productId));
@@ -46,5 +49,6 @@ public class ReviewService {
         }
         throw new RuntimeException("Review not found with id: " + id);
     }
+
 
 }
