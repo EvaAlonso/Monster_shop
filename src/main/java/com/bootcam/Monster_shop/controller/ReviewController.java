@@ -18,10 +18,10 @@ public class ReviewController {
     public ReviewController(ReviewService reviewService){
         this.reviewService = reviewService;
     }
-   // @GetMapping
-   // public List<Review> getAllreviews(){
-    //    return reviewService.getAll();
-   // }
+    @GetMapping("/allReviews")
+    public List<Review> getAllreviews(){
+       return reviewService.getAll();
+    }
     @GetMapping
     public ResponseEntity<List<Review>> getReviews(@RequestParam Long productId){
         List<Review> reviews = reviewService.getReviewsByProductId(productId);
