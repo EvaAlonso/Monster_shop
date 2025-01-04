@@ -33,7 +33,7 @@ public class ProductService {
              existingProduct.setName(updateProduct.getName());
              existingProduct.setPrice(updateProduct.getPrice());
              existingProduct.setImageUrl(updateProduct.getImageUrl());
-             existingProduct.setRating(updateProduct.getRating());
+             existingProduct.setFeatured(updateProduct.isFeatured());
              existingProduct.setReviewCount(updateProduct.getReviewCount());
 
 

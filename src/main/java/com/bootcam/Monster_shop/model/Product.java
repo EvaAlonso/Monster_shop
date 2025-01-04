@@ -15,16 +15,17 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String name;
     private double price;
     private String imageUrl;
-    private double rating;
     private int reviewCount;
     private boolean featured;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 
-    private List<Review> reviewList;
+    private List<Review> reviews;
+
+
 
 }

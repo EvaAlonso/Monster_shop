@@ -23,7 +23,7 @@ public class ReviewController {
        return reviewService.getAll();
     }
     @GetMapping
-    public ResponseEntity<List<Review>> getReviews(@RequestParam Long productId){
+    public ResponseEntity<List<Review>> getReviews(@RequestParam long productId){
         List<Review> reviews = reviewService.getReviewsByProductId(productId);
         if(reviews.isEmpty()){
             return ResponseEntity.noContent().build();
@@ -40,7 +40,7 @@ public class ReviewController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @PostMapping("/product/{productId}")
-    public void createReview(@PathVariable Long productId ,@RequestBody Review newReview){
+    public void createReview(@PathVariable long productId ,@RequestBody Review newReview){
         reviewService.addReview(productId,newReview);
     }
     @DeleteMapping("/{id}")

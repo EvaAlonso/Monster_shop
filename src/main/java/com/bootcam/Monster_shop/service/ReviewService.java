@@ -14,7 +14,7 @@ public class ReviewService {
     private final ReviewRepository ReviewRepository;
     private final ProductRepository ProductRepository;
 
-    public ReviewService(ReviewRepository reviewRepository, ProductRepository productRepository, com.bootcam.Monster_shop.repository.ProductRepository productRepository1) {
+    public ReviewService(ReviewRepository reviewRepository, ProductRepository productRepository) {
         ReviewRepository = reviewRepository;
         ProductRepository = productRepository;
     }
@@ -22,11 +22,11 @@ public class ReviewService {
     public List<Review> getAll(){
         return ReviewRepository.findAll();
     }
-    public List<Review> getReviewsByProductId(Long productId){
+    public List<Review> getReviewsByProductId(long productId){
         return ReviewRepository.findByProductId(productId);
     }
     //Tengo que buscar el producto por su id, asignar el producto a la reseña y guardar la reseña
-    public Review addReview(Long productId,Review newReview){
+    public Review addReview(long productId,Review newReview){
         Product product = ProductRepository.findById(productId).orElseThrow(()->new RuntimeException("Product not found with id :" + productId));
         newReview.setProduct(product);
         return ReviewRepository.save(newReview);
